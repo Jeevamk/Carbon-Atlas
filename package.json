@@ -1,0 +1,20 @@
+{
+  "name": "carbon-atlas",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Interactive D3 explorer of CO2 emissions by country since 1950",
+  "type": "module",
+  "scripts": {
+    "data": "python3 scripts/prepare_data.py",
+    "dev": "vite",
+    "build": "vite build",
+    "build:standalone": "vite build && node scripts/build-standalone.mjs",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "d3": "7.9.0"
+  },
+  "devDependencies": {
+    "vite": "^5.4.21"
+  }
+}
