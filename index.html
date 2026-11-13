@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Carbon Atlas</title>
+  <meta name="description" content="Explore fossil CO₂ emissions for every country since 1950 with interactive D3 charts.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,200..800&display=swap">
+</head>
+<body>
+  <header class="masthead">
+    <h1>Carbon Atlas</h1>
+    <p class="lede">Fossil CO₂ emissions for every country since 1950. Move through the years, filter by continent and pick countries to compare.</p>
+  </header>
+
+  <nav class="views" role="tablist" aria-label="Chart views">
+    <a href="#wealth" role="tab" data-view="wealth">Wealth and emissions</a>
+    <a href="#ranking" role="tab" data-view="ranking">Biggest emitters</a>
+    <a href="#trends" role="tab" data-view="trends">Country trends</a>
+  </nav>
+
+  <main class="workspace">
+    <section class="stage" aria-live="polite">
+      <div class="toolbar">
+        <div class="continents" id="continents" data-show="wealth ranking" role="group" aria-label="Show continents"></div>
+        <div class="toolbar-end">
+          <label class="field" data-show="ranking trends">
+            <span>Measure</span>
+            <select id="metric"></select>
+          </label>
+          <label class="switch" data-show="wealth">
+            <input type="checkbox" id="logY" checked>
+            <span>Log scale</span>
+          </label>
+        </div>
+      </div>
+
+      <p class="view-note" id="viewNote"></p>
+
+      <div class="charts" id="charts">
+        <div class="chart-host" data-chart="wealth"></div>
+        <div class="chart-host" data-chart="ranking"></div>
+        <div class="chart-host" data-chart="trends"></div>
+        <div class="loading" id="loading">Loading 75 years of emissions data…</div>
+      </div>
+
+      <div class="timeline">
+        <button type="button" class="play" id="play" aria-label="Play through the years">
+          <svg class="icon-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9.5-5.5z"/></svg>
+          <svg class="icon-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg>
+        </button>
+        <div class="scrubber">
+          <input type="range" id="year" aria-label="Year">
+          <div class="scrubber-ends"><span id="yearMin"></span><span id="yearMax"></span></div>
+        </div>
+        <output id="yearOut" for="year"></output>
+      </div>
+      <p class="timeline-note" id="timelineNote" hidden></p>
+    </section>
+
+    <aside class="compare" aria-labelledby="compareTitle">
+      <h2 id="compareTitle">Compare countries</h2>
+      <p class="hint">Pick up to 6. Click any circle or bar to add it, or search here.</p>
+      <div class="search">
+        <input id="search" type="search" list="countryList" placeholder="Add a country" autocomplete="off" aria-label="Add a country">
+        <datalist id="countryList"></datalist>
+      </div>
+      <ul class="picked" id="picked"></ul>
+      <p class="picked-caption" id="pickedCaption"></p>
+    </aside>
+  </main>
+
+  <footer class="colophon">
+    <p>Data from <a href="https://github.com/owid/co2-data">Our World in Data’s CO₂ and greenhouse gas dataset</a>. Emissions are territorial fossil and industry CO₂ and exclude land use. GDP figures come from the Maddison Project and are in international dollars, adjusted for inflation and price differences between countries.</p>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
